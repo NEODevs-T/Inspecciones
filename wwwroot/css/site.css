@@ -62,3 +62,43 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+    *{
+        font-family:'Century Gothic', Tahoma !important;
+    }
+    
+    body{
+        margin: 0px !important;
+    }
+    
+    .cabeza{
+        display: flex;
+        justify-content: space-between;
+        align-items:center;
+        width: 80%;
+        height: 100%;
+    }
+    
+    .cabeza button,.cabeza input{
+        background-color: #3cad49;
+        color: white;
+        border: 50px black;
+        height: 80%;
+        width: 50%;
+        font-weight:900;
+        margin: 1%;
+        text-align: center;
+    }
+    
+    #zoom_controls{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50%;
+        width: 40%;
+    }
+    
+    .cabeza button:hover,.cabeza input:hover{
+        background-color:rgba(0, 0, 0, 0.8);
+    }

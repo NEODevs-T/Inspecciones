@@ -3,23 +3,23 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Inspecciones.Data{
-    public interface IDataImaqPre
+    public interface IDataPregunta
     {
         Task<List<ImaqPre>> ObtenerLasPreguntasPorMquina(int idMaquina);
     }
 
-    public class DataImaqPre : IDataImaqPre
+    public class DataPregunta : IDataPregunta
     {
         private readonly DbNeoContext _cotext;
 
-        public DataImaqPre(DbNeoContext context)
+        public DataPregunta(DbNeoContext context)
         {
             this._cotext = context;
         }
 
         public async Task<List<ImaqPre>> ObtenerLasPreguntasPorMquina(int idMaquina)
         {
-            return await this._cotext.ImaqPres.Where(mp => mp.IdMaquina == idMaquina).Include(mp => mp.IdPreguntaNavigation).ThenInclude(p => p.IdTipPreNavigation).ToListAsync();
+            return await this._cotext.ImaqPres.Where(mp => mp.IdMaquina == idMaquina).Include(mp => mp.IdPreguntaNavigation).ThenInclude(p => p.IdTipPreNavigation).OrderBy(mp => mp.IdPreguntaNavigation.IdTipPre).ToListAsync();
         }
     }
 

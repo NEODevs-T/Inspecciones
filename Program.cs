@@ -22,6 +22,13 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddOptions();  
 builder.Services.AddAuthorizationCore();
 
+builder.Services.AddDbContext<DbNeoContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionDbNeo")),ServiceLifetime.Transient
+);
+
+builder.Services.AddScoped<IDataInspeccion,DataInspeccion>();
+builder.Services.AddScoped<IDataPregunta,DataPregunta>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

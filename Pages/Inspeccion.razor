@@ -1,0 +1,25 @@
+@page "/inspeccion/{idMaquina:int}"
+@inject IDataInspeccion DataInspeccion
+@inject IDataPregunta DataPregunta
+
+@if(listPreguntas != null){
+    <ul>
+    @foreach(ImaqPre item in listPreguntas){
+            <li>
+                @item.IdPreguntaNavigation.Pdescri - @item.IdPreguntaNavigation.IdTipPreNavigation.Tpnombre
+            </li>
+    }
+    </ul>
+}
+
+@code{
+    [Parameter]
+    public int idMaquina { get; set; }
+    public List<ImaqPre>? listPreguntas { get; set; } = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        listPreguntas = await DataPregunta.ObtenerLasPreguntasPorMquina(idMaquina);
+        
+    }
+}
