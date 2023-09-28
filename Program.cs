@@ -9,6 +9,8 @@ using Blazored.LocalStorage;
 using Inspecciones.Data;
 using Inspecciones.Models;
 
+using Radzen;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
