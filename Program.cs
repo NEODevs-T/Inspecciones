@@ -24,6 +24,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddOptions();  
 builder.Services.AddAuthorizationCore();
 
+builder.Services.AddScoped<NotificationService>();
+builder.Services.AddScoped<DialogService>();
+
 builder.Services.AddDbContext<DbNeoContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionDbNeo")),ServiceLifetime.Transient
 );

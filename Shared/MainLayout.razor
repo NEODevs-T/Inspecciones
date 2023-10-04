@@ -1,4 +1,6 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JS
 
 <PageTitle>Inspecciones</PageTitle>
 
@@ -11,17 +13,7 @@
         <div class="top-row px-4">
             <h5  class="cabeza">
                 <div class="opciones">
-                    <input type="button" id="1" class="link" value="Roll Clamp (Eléctrico)">
-                    <input type="button" id="2" class="link" value="Horquilla (Eléctrico)">
-                    <input type="button" id="3" class="link" value="Horquilla (Uña)">
-                    <input type="button" id="4" class="link" value="Roll Clamp">
-                    <input type="button" id="5" class="link" value="Payloader">
-                    <input type="button" id="6" class="link" value="Jaiba">
-                    <div id="zoom_controls">  
-                        <button id="zoom_in">+</button>
-                        <button id="zoom_out">-</button>
-                    </div>
-                    <input type="button" id="imprimir" name="imprimir" value="Imprimir" onclick="imprSelec()"> 
+                    <RadzenButton  Text="Imprimir" id="imprimir" name="imprimir" Click=@Imprimir/>
                 </div>
             </h5>
         </div>
@@ -30,4 +22,13 @@
             @Body
         </article>
     </main>
+    <RadzenNotification/>
+    <RadzenDialog />
 </div>
+
+@code{
+    protected async Task Imprimir(){
+        @* NavigationManager.NavigateTo($"impresion"); *@
+        JS.InvokeVoidAsync("imprimirElemento");
+    }
+}

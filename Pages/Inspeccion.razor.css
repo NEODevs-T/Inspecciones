@@ -43,3 +43,39 @@ textarea{
 #encabezadoForma{
     margin-bottom: 2%;
 }
+
+#encabezadoInpec{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+#EncabezadoIzquierda{
+    width: 35%;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+
+
+#EncabezadoIzquierda #titulo{
+    font-weight: bold;
+    font-size: 2.5em;
+}
+
+#EncabezadoDerecha{
+    width: 50%;
+}
+
+#secCarga{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100px;
+    padding-right: 5%;
+}
+

@@ -19,7 +19,7 @@ namespace Inspecciones.Data{
 
         public async Task<List<ImaqPre>> ObtenerLasPreguntasPorMquina(int idMaquina)
         {
-            return await this._cotext.ImaqPres.Where(mp => mp.IdMaquina == idMaquina).Include(mp => mp.IdPreguntaNavigation).ThenInclude(p => p.IdTipPreNavigation).OrderBy(mp => mp.IdPreguntaNavigation.IdTipPre).ToListAsync();
+            return await this._cotext.ImaqPres.Where(mp => mp.IdMaquina == idMaquina).Include(mp => mp.IdPreguntaNavigation).ThenInclude(p => p.IdTipPreNavigation).OrderBy(mp => mp.IdPreguntaNavigation.IdTipPre).AsNoTracking().ToListAsync(); //ThenInclude(p => p.IdTipPreNavigation)
         }
     }
 
@@ -36,23 +36,20 @@ namespace Inspecciones.Data{
             this._cotext = context;
         }
         public async Task<bool> InsertarInspeccion(Inspeccion inspeccion,List<InspecDatum> listData){
-            bool estado;
-            this._cotext.Inspeccions.Add(inspeccion);
-            estado = await _cotext.SaveChangesAsync() > 0;
-            if(estado == true){
-                estado = await this.InsertarData(inspeccion,listData);
-            }
-            return estado;
-        }
-
-        private async Task<bool> InsertarData(Inspeccion inspeccion,List<InspecDatum> listData){
+            InspecDatum data = new InspecDatum();
             foreach (var item in listData)
             {
-                item.IdInspecNavigation = inspeccion;
-                this._cotext.InspecData.Add(item);
+                data.IdInspecNavigation = inspeccion;
+                data.Idobserv = item.Idobserv;
+                data.IdMaqPre = item.IdMaqPreNavigation.IdMaqPre;
+                data.Iddata = item.Iddata;
+                this._cotext.InspecData.Add(data);
+                data = new InspecDatum();
             }
             return await this._cotext.SaveChangesAsync() > 0;
         }
+
+        
     }
 
 }
