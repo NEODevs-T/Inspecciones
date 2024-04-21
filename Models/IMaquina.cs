@@ -1,9 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+
 namespace Inspecciones.Models
 {
-    public class IMaquina{
+    public partial class Imaquina
+    {
+        public Imaquina()
+        {
+            ImaqPres = new HashSet<ImaqPre>();
+        }
+
         public int IdMaquina { get; set; }
-        public string MNombre { get; set; }
-        public string MDescri { get; set; }
-        public bool MEstado { get; set; }
+        public string Mnombre { get; set; } = null!;
+        public string? Mdescri { get; set; }
+        public bool? Mestado { get; set; }
+        public DateTime Mfecha { get; set; }
+
+        public virtual ICollection<ImaqPre> ImaqPres { get; set; }
     }
 }
