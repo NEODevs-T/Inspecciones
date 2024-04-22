@@ -1,21 +1,22 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.Authorization;
-
 using Microsoft.EntityFrameworkCore;
-
 using Blazored.LocalStorage;
-
 using Inspecciones.Data;
+using Inspecciones.Services;
 using Inspecciones.Models;
-
 using Radzen;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+builder.Services.AddScoped<IEmailServices,EmailServices>();
+
 
 builder.Services.AddBlazoredLocalStorage();
 
@@ -33,6 +34,7 @@ builder.Services.AddDbContext<DbNeoContext>(options =>
 
 builder.Services.AddScoped<IDataInspeccion,DataInspeccion>();
 builder.Services.AddScoped<IDataPregunta,DataPregunta>();
+
 
 var app = builder.Build();
 
