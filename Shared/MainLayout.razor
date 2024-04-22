@@ -13,7 +13,7 @@
         <div class="top-row px-4">
             <h5  class="cabeza">
                 <div class="opciones">
-                    <RadzenButton  Text="Imprimir" id="imprimir" name="imprimir" Click=@Imprimir/>
+                    <a href="http://neo.paveca.com.ve/Formatos/formatos.html" target="_blank" rel="noopener noreferrer" id="imprimir" name="imprimir">Impresiones</a>
                 </div>
             </h5>
         </div>
@@ -26,9 +26,3 @@
     <RadzenDialog />
 </div>
 
-@code{
-    protected async Task Imprimir(){
-        @* NavigationManager.NavigateTo($"impresion"); *@
-        JS.InvokeVoidAsync("imprimirElemento");
-    }
-}

@@ -2,53 +2,59 @@
 @inject IDataInspeccion DataInspeccion
 @inject IDataPregunta DataPregunta
 @inject NotificationService NotificationService
-
-<section id="encabezadoInpec">
-    <aside id="EncabezadoIzquierda">
-            <RadzenImage id="img" Path="img/paveca.png"/>
-            <h1 id="titulo">INSPECCION DE MAQUINAS</h1>
-    </aside>
-    <aside id="EncabezadoDerecha">
-        <RadzenTemplateForm TItem="Models.Inspeccion" Data=@nuevaInspeccion>
-            <RadzenFieldset Text="Inpseccion">
-                <RadzenStack Gap="2rem" Class="rz-p-1 rz-p-md-2">
-                    <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
-                        <RadzenColumn Size="1" SizeMD="1">
-                            <RadzenLabel Text="Turno" />
-                        </RadzenColumn>
-                        <RadzenColumn Size="5" SizeMD="5" Class="rz-text-align-center rz-text-align-md-center">
-                                <RadzenRadioButtonList Data="@listaTurno" @bind-Value=@nuevaInspeccion.Iturno TValue="string" />
-                        </RadzenColumn>
-                        <RadzenColumn Size="1" SizeMD="1">
-                            <RadzenLabel Text="Grupo" />
-                        </RadzenColumn>
-                        <RadzenColumn Size="5" SizeMD="5" Class="rz-text-align-center rz-text-align-md-center">
-                            <RadzenRadioButtonList Data="@listaGrupo" @bind-Value=@nuevaInspeccion.Igrupo TValue="string"/>
-                        </RadzenColumn>
-                    </RadzenRow>
-                    <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
-                        <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
-                            <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Equipo">
-                                <RadzenTextBox @bind-Value=nuevaInspeccion.Iequipo Style="width: 100%;" />
-                            </RadzenFormField>
-                        </RadzenColumn>
-                        <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
-                            <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Area">
-                                <RadzenTextBox @bind-Value=nuevaInspeccion.Iarea Style="width: 100%;" />
-                            </RadzenFormField>
-                        </RadzenColumn>
-                        <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
-                            <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Ficha">
-                                <RadzenTextBox @bind-Value=nuevaInspeccion.Ificha Style="width: 100%;" />
-                            </RadzenFormField>
-                        </RadzenColumn>
-                    </RadzenRow>
-                </RadzenStack>
-            </RadzenFieldset>
-        </RadzenTemplateForm>
-    </aside>
-</section>
-
+@if(isCargado){
+    <section id="encabezadoInpec">
+        <aside id="EncabezadoIzquierda">
+                <RadzenImage id="img" Path="img/paveca.png"/>
+                <h1 id="titulo">INSPECCION DE MAQUINAS</h1>
+        </aside>
+        <aside id="EncabezadoDerecha">
+            <RadzenTemplateForm TItem="Models.Inspeccion" Data=@nuevaInspeccion>
+                <RadzenFieldset Text="Inpseccion">
+                    <RadzenStack Gap="2rem" Class="rz-p-1 rz-p-md-2">
+                        <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
+                            <RadzenColumn Size="1" SizeMD="1">
+                                <RadzenLabel Text="Turno" />
+                            </RadzenColumn>
+                            <RadzenColumn Size="5" SizeMD="5" Class="rz-text-align-center rz-text-align-md-center">
+                                    <RadzenRadioButtonList Data="@listaTurno" @bind-Value=@nuevaInspeccion.Iturno TValue="string" />
+                            </RadzenColumn>
+                            <RadzenColumn Size="1" SizeMD="1">
+                                <RadzenLabel Text="Grupo" />
+                            </RadzenColumn>
+                            <RadzenColumn Size="5" SizeMD="5" Class="rz-text-align-center rz-text-align-md-center">
+                                <RadzenRadioButtonList Data="@listaGrupo" @bind-Value=@nuevaInspeccion.Igrupo TValue="string"/>
+                            </RadzenColumn>
+                        </RadzenRow>
+                        <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
+                            <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
+                                <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Equipo">
+                                    <RadzenTextBox @bind-Value=nuevaInspeccion.Iequipo Style="width: 100%;" />
+                                </RadzenFormField>
+                            </RadzenColumn>
+                            <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
+                                <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Area">
+                                    <RadzenTextBox @bind-Value=nuevaInspeccion.Iarea Style="width: 100%;" />
+                                </RadzenFormField>
+                            </RadzenColumn>
+                            <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
+                                <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Ficha">
+                                    <RadzenTextBox @bind-Value=nuevaInspeccion.Ificha Style="width: 100%;" />
+                                </RadzenFormField>
+                            </RadzenColumn>
+                        </RadzenRow>
+                    </RadzenStack>
+                </RadzenFieldset>
+            </RadzenTemplateForm>
+        </aside>
+    </section>
+}else{
+    <BSRow class="carga" Justify="Justify.Center">
+        <BSCol Column="3">
+        <div class="loader"></div>
+        </BSCol>  
+    </BSRow>
+}
 
 
 @if(listaDataInspeccion != null && listaDataInspeccion[0].IdMaqPreNavigation != null){
@@ -95,10 +101,11 @@
     public void cambioTipo(string tipo) => this.tipoAnterior = tipo;
     public int turno  { get; set;} 
     public bool band {get; set;}
+    public bool isCargado {get; set;} = false;
     public List<string> listaTurno = new List<string>{"1","2"};
     public List<string> listaGrupo = new List<string>{"A","B","C","D","N"};
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         nuevaInspeccion = new Models.Inspeccion();
         nuevaInspeccion.Igrupo = "A";
@@ -108,6 +115,20 @@
     
     protected override async Task OnParametersSetAsync()
     {
+        isCargado = false;
+        nuevaInspeccion.Iarea = "";
+        nuevaInspeccion.Iequipo = "";
+
+        if(idMaquina == 6){
+            nuevaInspeccion.Iarea = "5401";
+            nuevaInspeccion.Iequipo = "210-116";
+        }else if(idMaquina == 7){
+            nuevaInspeccion.Iarea = "5401";
+            nuevaInspeccion.Iequipo = "210-140";
+        }else if(idMaquina == 8){
+            nuevaInspeccion.Iequipo = "210-343";
+        }
+
         try{
             listPreguntas = await DataPregunta.ObtenerLasPreguntasPorMquina(idMaquina);
             tipoAnterior = "";
@@ -119,6 +140,7 @@
         }catch{
             Notificacion("error","Error","Recargue la pagina");
         }
+        isCargado = true;
     }
 
     protected async Task Registrar(){
@@ -157,5 +179,5 @@
             notificacion = new NotificationMessage { Severity = NotificationSeverity.Warning, Summary = mensaje, Detail = detalle, Duration = 8000 };
         }
         NotificationService.Notify(notificacion);
-    } 
+    }
 }

@@ -105,14 +105,15 @@ a, .btn-link {
         height: 100%;
     }
     
-    .cabeza button,.cabeza input{
+    .cabeza button,.cabeza input,.cabeza a{
         background-color: #3cad49;
         color: white;
         border: 50px black;
         height: 80%;
-        width: 10%;
+        width: 12%;
         font-weight:900;
         text-align: center;
+        text-decoration: none;
     }
     
     #zoom_controls{
@@ -123,7 +124,7 @@ a, .btn-link {
         width: 40%;
     }
     
-    .cabeza button:hover,.cabeza input:hover{
+    .cabeza button:hover,.cabeza input:hover, .cabeza a:hover{
         background-color:rgba(0, 0, 0, 0.8);
     }
 
