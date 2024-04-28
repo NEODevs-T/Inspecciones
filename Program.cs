@@ -34,6 +34,7 @@ builder.Services.AddDbContext<DbNeoContext>(options =>
 
 builder.Services.AddScoped<IDataInspeccion,DataInspeccion>();
 builder.Services.AddScoped<IDataPregunta,DataPregunta>();
+builder.Services.AddScoped<IDataMaquina,DataMaquina>();
 
 
 var app = builder.Build();
