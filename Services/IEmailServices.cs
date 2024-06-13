@@ -17,11 +17,6 @@ namespace Inspecciones.Services
     public class EmailServices : IEmailServices
     {
         private readonly SmtpSettings _smtpSettings;
-
-        //public EmailServices(SmtpSettings smtpSettings)
-        //{
-        //    _smtpSettings = smtpSettings;
-        //}
         public async Task SendEmailAsync(Email request)
         {
             try

@@ -2,6 +2,9 @@
 @inject IDataInspeccion DataInspeccion
 @inject IDataPregunta DataPregunta
 @inject NotificationService NotificationService
+@inject IEmailServices EmailServices
+
+
 @if(isCargado){
     <section id="encabezadoInpec">
         <aside id="EncabezadoIzquierda">
@@ -34,7 +37,7 @@
                             </RadzenColumn>
                             <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
                                 <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Area">
-                                    <RadzenTextBox @bind-Value=nuevaInspeccion.Iarea Style="width: 100%;" />
+                                    <RadzenDropDown @bind-Value=nuevaInspeccion.Iarea Data=@listaArea style="width: 98%;" />
                                 </RadzenFormField>
                             </RadzenColumn>
                             <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
@@ -104,6 +107,7 @@
     public bool isCargado {get; set;} = false;
     public List<string> listaTurno = new List<string>{"1","2"};
     public List<string> listaGrupo = new List<string>{"A","B","C","D","N"};
+    IEnumerable<string> listaArea = new List<string>{"PPPD","PT","CS"};
 
     protected override void OnInitialized()
     {
@@ -148,6 +152,9 @@
             nuevaInspeccion.Ifecha = DateTime.Now;  
             band = await DataInspeccion.InsertarInspeccion(nuevaInspeccion,listaDataInspeccion);
             if(band){
+                
+                
+
                 Notificacion("exito","","Cargado con exito");
                 nuevaInspeccion = new Models.Inspeccion();
 
