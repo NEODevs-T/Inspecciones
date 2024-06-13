@@ -1,6 +1,7 @@
 using Inspecciones.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Radzen;
 
 namespace Inspecciones.Data{
     public interface IDataPregunta
@@ -48,8 +49,28 @@ namespace Inspecciones.Data{
             }
             return await this._cotext.SaveChangesAsync() > 0;
         }
+    }
 
-        
+    public interface IDataMaquina
+    {
+        Task<string> obtenerNombreMaquina(int idMaquina);
+    }
+
+    public class DataMaquina : IDataMaquina
+    {
+        private readonly DbNeoContext _cotext;
+
+        public DataMaquina(DbNeoContext context)
+        {
+            this._cotext = context;
+        }
+
+        public async Task<string> obtenerNombreMaquina(int idMaquina)
+        {
+            Imaquina? data = await this._cotext.Imaquinas.Where(m => m.IdMaquina == idMaquina).FirstOrDefaultAsync();
+
+            return (data != null) ? data.Mnombre : "";
+        }
     }
 
 }

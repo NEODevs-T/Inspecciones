@@ -1,9 +1,9 @@
 @page "/inspeccion/{idMaquina:int}"
 @inject IDataInspeccion DataInspeccion
 @inject IDataPregunta DataPregunta
+@inject IDataMaquina DataMaquina
 @inject NotificationService NotificationService
 @inject IEmailServices EmailServices
-
 
 @if(isCargado){
     <section id="encabezadoInpec">
@@ -108,6 +108,9 @@
     public List<string> listaTurno = new List<string>{"1","2"};
     public List<string> listaGrupo = new List<string>{"A","B","C","D","N"};
     IEnumerable<string> listaArea = new List<string>{"PPPD","PT","CS"};
+    public string asunto;
+    public string cuerpo;
+    public string personas;
 
     protected override void OnInitialized()
     {
@@ -154,6 +157,10 @@
             if(band){
                 
                 
+                @* asunto = $"Inspeccion de Montacargas ({DataMaquina.obtenerNombreMaquina(idMaquina)} - {nuevaInspeccion.Iequipo})  {DateTime.Now.ToString("dd/MM/yyyy")}";
+                personas = "gabriel.arcila";
+                cuerpo = EmailServices.ConstruccionCuerpo(nuevaInspeccion,listaDataInspeccion);
+                band = await EmailServices.ContruccionEmail(personas,cuerpo,asunto); *@
 
                 Notificacion("exito","","Cargado con exito");
                 nuevaInspeccion = new Models.Inspeccion();
@@ -165,6 +172,11 @@
                     listaDataInspeccion.Add(new InspecDatum());
                     listaDataInspeccion[i].IdMaqPreNavigation =  listPreguntas[i];
                 }
+
+                if(!band){
+                    Notificacion("error","","Hubo un error al enviar el correo automatico");
+                }
+
             }else{
                 Notificacion("error","","Hubo un error de inserccion por favor intente mas tarde");
             }
