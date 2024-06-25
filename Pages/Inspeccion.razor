@@ -5,94 +5,110 @@
 @inject NotificationService NotificationService
 @inject IEmailServices EmailServices
 
-@if(isCargado){
-    <section id="encabezadoInpec">
-        <aside id="EncabezadoIzquierda">
-                <RadzenImage id="img" Path="img/paveca.png"/>
-                <h1 id="titulo">INSPECCION DE MAQUINAS</h1>
-        </aside>
-        <aside id="EncabezadoDerecha">
-            <RadzenTemplateForm TItem="Models.Inspeccion" Data=@nuevaInspeccion>
-                <RadzenFieldset Text="Inpseccion">
-                    <RadzenStack Gap="2rem" Class="rz-p-1 rz-p-md-2">
-                        <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
-                            <RadzenColumn Size="1" SizeMD="1">
-                                <RadzenLabel Text="Turno" />
-                            </RadzenColumn>
-                            <RadzenColumn Size="5" SizeMD="5" Class="rz-text-align-center rz-text-align-md-center">
-                                    <RadzenRadioButtonList Data="@listaTurno" @bind-Value=@nuevaInspeccion.Iturno TValue="string" />
-                            </RadzenColumn>
-                            <RadzenColumn Size="1" SizeMD="1">
-                                <RadzenLabel Text="Grupo" />
-                            </RadzenColumn>
-                            <RadzenColumn Size="5" SizeMD="5" Class="rz-text-align-center rz-text-align-md-center">
-                                <RadzenRadioButtonList Data="@listaGrupo" @bind-Value=@nuevaInspeccion.Igrupo TValue="string"/>
-                            </RadzenColumn>
-                        </RadzenRow>
-                        <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
-                            <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
-                                <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Equipo">
-                                    <RadzenTextBox @bind-Value=nuevaInspeccion.Iequipo Style="width: 100%;" />
-                                </RadzenFormField>
-                            </RadzenColumn>
-                            <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
-                                <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Area">
-                                    <RadzenDropDown @bind-Value=nuevaInspeccion.Iarea Data=@listaArea style="width: 98%;" />
-                                </RadzenFormField>
-                            </RadzenColumn>
-                            <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
-                                <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Ficha">
-                                    <RadzenTextBox @bind-Value=nuevaInspeccion.Ificha Style="width: 100%;" />
-                                </RadzenFormField>
-                            </RadzenColumn>
-                        </RadzenRow>
-                    </RadzenStack>
-                </RadzenFieldset>
-            </RadzenTemplateForm>
-        </aside>
-    </section>
-}else{
-    <BSRow class="carga" Justify="Justify.Center">
-        <BSCol Column="3">
-        <div class="loader"></div>
-        </BSCol>  
-    </BSRow>
-}
+<RadzenTemplateForm TItem="Models.Inspeccion"  Data="@nuevaInspeccion" Submit=@Registrar InvalidSubmit=@Invalido>
 
-
-@if(listaDataInspeccion != null && listaDataInspeccion[0].IdMaqPreNavigation != null){
-    @foreach(InspecDatum item in listaDataInspeccion){
-
-            @if(tipoAnterior == ""){ 
-                cambioTipo(item.IdMaqPreNavigation.IdPreguntaNavigation.IdTipPreNavigation.Tpnombre);
-                <section class="contenTipoPregunta">
-                    <h2 class="TipoPregunta">@tipoAnterior</h2>
-                    <h2 class="Observacion">Observacion</h2>
-                </section>
-            }else if(tipoAnterior != item.IdMaqPreNavigation.IdPreguntaNavigation.IdTipPreNavigation.Tpnombre){
-                cambioTipo(item.IdMaqPreNavigation.IdPreguntaNavigation.IdTipPreNavigation.Tpnombre);
-                <section class="contenTipoPregunta">
-                    <h2 class="TipoPregunta">@tipoAnterior</h2>
-                    <h2 class="Observacion">Observacion</h2>
-                </section>
-            }
-            <aside class="contenPregunta">
-                <h3 class="pregunta">
-                    <div>@item.IdMaqPreNavigation.IdPreguntaNavigation.Pdescri</div>
-                    <RadzenSelectBar  @bind-Value=item.Iddata TValue="bool" class="selecttt">
-                        <Items>
-                            <RadzenSelectBarItem Text="Bien" Value="true" />
-                            <RadzenSelectBarItem Text="Defecutoso" Value="false" />
-                        </Items>
-                    </RadzenSelectBar>
-                </h3>
-                <h3 class="textObsevacion"><RadzenTextArea @bind-Value=item.Idobserv  class="w-100" Cols="30" Rows="2" /></h3>
+    @if(isCargado){
+        
+        <section id="encabezadoInpec">
+            <aside id="EncabezadoIzquierda">
+                    <RadzenImage id="img" Path="img/paveca.png"/>
+                    <h1 id="titulo">INSPECCION DE MAQUINAS</h1>
             </aside>
+            <aside id="EncabezadoDerecha">
+                @* <RadzenTemplateForm TItem="Models.Inspeccion" Data=@nuevaInspeccion> *@
+                    <RadzenFieldset Text="Inpseccion">
+                        <RadzenStack Gap="2rem" Class="rz-p-1 rz-p-md-2">
+                            <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
+                                <RadzenColumn Size="1" SizeMD="1">
+                                    <RadzenLabel Text="Turno" />
+                                </RadzenColumn>
+                                <RadzenColumn  Size="5" SizeMD="5" Class="rz-text-align-center rz-text-align-md-center">
+                                        <RadzenRadioButtonList Name="Iturno" Data="@listaTurno" @bind-Value=@nuevaInspeccion.Iturno TValue="string" />
+                                        <RadzenRequiredValidator Component="Iturno" Text="Es Requerido" Popup=false/>
+                                </RadzenColumn>
+                                <RadzenColumn Size="1" SizeMD="1">
+                                    <RadzenLabel Text="Grupo" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="5" SizeMD="5" Class="rz-text-align-center rz-text-align-md-center">
+                                    <RadzenRadioButtonList Name="Igrupo" Data="@listaGrupo" @bind-Value=@nuevaInspeccion.Igrupo TValue="string"/>
+                                    <RadzenRequiredValidator Component="Igrupo" Text="Es Requerido" Popup=false/>
+                                </RadzenColumn>
+                            </RadzenRow>
+                            <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
+                                <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
+                                    <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Equipo">
+                                        <RadzenTextBox Name="Iequipo" @bind-Value=nuevaInspeccion.Iequipo Style="width: 100%;" />
+                                        <RadzenLengthValidator Component="Iequipo" Min="6" Text="Se debe poner los 6 numeros del equipo" Popup=false />
+                                        <RadzenLengthValidator Component="Iequipo"  Max="6" Text="Se debe poner los 6 numeros del equipo" Popup=false />
+                                    </RadzenFormField>
+                                </RadzenColumn>
+                                <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
+                                    <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Area">
+                                        <RadzenDropDown Name="Iarea" @bind-Value=nuevaInspeccion.Iarea Data=@listaArea style="width: 98%;" />
+                                        <RadzenRequiredValidator Component="Iarea" Text="Es Requerido" Popup=false/>
+                                    </RadzenFormField>
+                                </RadzenColumn>
+                                <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
+                                    <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Ficha">
+                                        <RadzenTextBox Name="Ificha" @bind-Value=nuevaInspeccion.Ificha Style="width: 100%;" />
+                                        <RadzenRequiredValidator Component="Ificha" Text="Es Requerido" Popup=false/>
+                                    </RadzenFormField>
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenStack>
+                    </RadzenFieldset>
+                @* </RadzenTemplateForm> *@
+            </aside>
+        </section>  
+    }else{
+        <BSRow class="carga" Justify="Justify.Center">
+            <BSCol Column="3">
+            <div class="loader"></div>
+            </BSCol>  
+        </BSRow>
     }
-    <section id="secCarga">
-        <RadzenButton Click=@Registrar Text="Registrar" ButtonStyle="ButtonStyle.Success" />
-    </section>
-}
+
+
+
+
+    @if(listaDataInspeccion != null && listaDataInspeccion[0].IdMaqPreNavigation != null){
+        @foreach(InspecDatum item in listaDataInspeccion){
+
+                @if(tipoAnterior == ""){ 
+                    cambioTipo(item.IdMaqPreNavigation.IdPreguntaNavigation.IdTipPreNavigation.Tpnombre);
+                    <section class="contenTipoPregunta">
+                        <h2 class="TipoPregunta">@tipoAnterior</h2>
+                        <h2 class="Observacion">Observacion</h2>
+                    </section>
+                }else if(tipoAnterior != item.IdMaqPreNavigation.IdPreguntaNavigation.IdTipPreNavigation.Tpnombre){
+                    cambioTipo(item.IdMaqPreNavigation.IdPreguntaNavigation.IdTipPreNavigation.Tpnombre);
+                    <section class="contenTipoPregunta">
+                        <h2 class="TipoPregunta">@tipoAnterior</h2>
+                        <h2 class="Observacion">Observacion</h2>
+                    </section>
+                }
+                <aside class="contenPregunta">
+                    <h3 class="pregunta">
+                        <div>@item.IdMaqPreNavigation.IdPreguntaNavigation.Pdescri</div>
+                        <RadzenSelectBar  @bind-Value=item.Iddata TValue="int" class="selecttt">
+                            <Items>
+                                <RadzenSelectBarItem Text="Bien" Value="1" />
+                                <RadzenSelectBarItem Text="Defecutoso" Value="0" />
+                                <RadzenSelectBarItem Text="No_Aplica" Value="2" />
+                            </Items>
+                        </RadzenSelectBar>
+                    </h3>
+                    <h3 class="textObsevacion"><RadzenTextArea @bind-Value=item.Idobserv  class="w-100" Cols="30" Rows="2" /></h3>
+                </aside>
+        }
+        <section id="secCarga">
+            @* <RadzenButton Click=@Registrar Text="Registrar" ButtonStyle="ButtonStyle.Success" /> *@
+            <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Success" Text="Registrar" />
+        </section>
+    }
+
+</RadzenTemplateForm>
+
 
 @code{
     [Parameter]
@@ -108,9 +124,9 @@
     public List<string> listaTurno = new List<string>{"1","2"};
     public List<string> listaGrupo = new List<string>{"A","B","C","D","N"};
     IEnumerable<string> listaArea = new List<string>{"PPPD","PT","CS"};
-    public string asunto;
+    @* public string asunto;
     public string cuerpo;
-    public string personas;
+    public string personas; *@
 
     protected override void OnInitialized()
     {
@@ -151,9 +167,9 @@
     protected async Task Registrar(){
         try{
             nuevaInspeccion.Ifecha = DateTime.Now;  
+            nuevaInspeccion.Iequipo = nuevaInspeccion.Iequipo.Insert(3,"-");
             band = await DataInspeccion.InsertarInspeccion(nuevaInspeccion,listaDataInspeccion);
             if(band){
-                
                 
                 @* asunto = $"Inspeccion de Montacargas ({DataMaquina.obtenerNombreMaquina(idMaquina)} - {nuevaInspeccion.Iequipo})  {DateTime.Now.ToString("dd/MM/yyyy")}";
                 personas = "gabriel.arcila";
@@ -161,11 +177,12 @@
                 band = await EmailServices.ContruccionEmail(personas,cuerpo,asunto); *@
 
                 Notificacion("exito","","Cargado con exito");
-                nuevaInspeccion = new Models.Inspeccion();
 
+                nuevaInspeccion = new Models.Inspeccion();
                 listPreguntas = await DataPregunta.ObtenerLasPreguntasPorMquina(idMaquina);
                 tipoAnterior = "";
                 listaDataInspeccion = new List<InspecDatum>(listPreguntas.Count);
+
                 for(int i = 0; i < listPreguntas.Count;i++){
                     listaDataInspeccion.Add(new InspecDatum());
                     listaDataInspeccion[i].IdMaqPreNavigation =  listPreguntas[i];
@@ -174,13 +191,16 @@
                 if(!band){
                     Notificacion("error","","Hubo un error al enviar el correo automatico");
                 }
-
             }else{
                 Notificacion("error","","Hubo un error de inserccion por favor intente mas tarde");
             }
         }catch{
             Notificacion("error","Error","Recargue la pagina");
         }
+    }
+
+    protected async Task Invalido(FormInvalidSubmitEventArgs args){
+        Notificacion("error","Error:"," Por favor verificar el formulario");
     }
     public void Notificacion(string tipo,string mensaje,string detalle)
     {

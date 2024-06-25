@@ -87,7 +87,7 @@ namespace Inspecciones.Services
 
         public string ConstruccionCuerpo(Inspeccion inspeccion,List<InspecDatum> listData)
         {
-            List<InspecDatum> listDataCopi = listData.Where( l => l.Iddata == false).ToList();
+            List<InspecDatum> listDataCopi = listData.Where( l => l.Iddata == 0).ToList();
 
             if(listDataCopi.Count == 0){
                 return "Ningun defecto";
