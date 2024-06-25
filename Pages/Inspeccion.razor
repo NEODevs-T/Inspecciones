@@ -16,7 +16,7 @@
             </aside>
             <aside id="EncabezadoDerecha">
                 @* <RadzenTemplateForm TItem="Models.Inspeccion" Data=@nuevaInspeccion> *@
-                    <RadzenFieldset Text="Inpseccion">
+                    
                         <RadzenStack Gap="2rem" Class="rz-p-1 rz-p-md-2">
                             <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
                                 <RadzenColumn Size="1" SizeMD="1">
@@ -56,7 +56,7 @@
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenStack>
-                    </RadzenFieldset>
+                    
                 @* </RadzenTemplateForm> *@
             </aside>
         </section>  
@@ -143,11 +143,11 @@
         nuevaInspeccion.Iequipo = "";
 
         if(idMaquina == 6){
-            nuevaInspeccion.Iequipo = "210-116";
+            nuevaInspeccion.Iequipo = "210116";
         }else if(idMaquina == 7){
-            nuevaInspeccion.Iequipo = "210-140";
+            nuevaInspeccion.Iequipo = "210140";
         }else if(idMaquina == 8){
-            nuevaInspeccion.Iequipo = "210-343";
+            nuevaInspeccion.Iequipo = "210343";
         }
 
         try{
@@ -186,6 +186,14 @@
                 for(int i = 0; i < listPreguntas.Count;i++){
                     listaDataInspeccion.Add(new InspecDatum());
                     listaDataInspeccion[i].IdMaqPreNavigation =  listPreguntas[i];
+                }
+
+                if(idMaquina == 6){
+                    nuevaInspeccion.Iequipo = "210116";
+                }else if(idMaquina == 7){
+                    nuevaInspeccion.Iequipo = "210140";
+                }else if(idMaquina == 8){
+                    nuevaInspeccion.Iequipo = "210343";
                 }
 
                 if(!band){
