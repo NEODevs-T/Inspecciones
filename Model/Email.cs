@@ -1,4 +1,4 @@
-﻿namespace Inspecciones.Models
+﻿namespace Inspecciones.Model
 {
     public class Email
     {
