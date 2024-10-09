@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Blazored.LocalStorage;
 using Inspecciones.Data;
@@ -11,9 +13,15 @@ using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddRazorComponents()
+    .AddInteractiveWebAssemblyComponents()
+    .AddInteractiveServerComponents();
+
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddScoped<Radzen.ThemeService>();
 
 builder.Services.AddScoped<IEmailServices,EmailServices>();
 
@@ -25,6 +33,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddOptions();  
 builder.Services.AddAuthorizationCore();
 
+
+
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddScoped<DialogService>();
 
@@ -35,6 +45,8 @@ builder.Services.AddDbContext<DbNeoContext>(options =>
 builder.Services.AddScoped<IDataInspeccion,DataInspeccion>();
 builder.Services.AddScoped<IDataPregunta,DataPregunta>();
 builder.Services.AddScoped<IDataMaquina,DataMaquina>();
+
+
 
 
 var app = builder.Build();
