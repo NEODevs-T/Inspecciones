@@ -4,7 +4,7 @@ using MimeKit;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit.Text;
-using Inspecciones.Models;
+using Inspecciones.Model;
 
 namespace Inspecciones.Services
 {

@@ -5,7 +5,7 @@
 @inject NotificationService NotificationService
 @inject IEmailServices EmailServices
 
-<RadzenTemplateForm TItem="Models.Inspeccion"  Data="@nuevaInspeccion" Submit=@Registrar InvalidSubmit=@Invalido>
+<RadzenTemplateForm TItem="Model.Inspeccion"  Data="@nuevaInspeccion" Submit=@Registrar InvalidSubmit=@Invalido>
 
     @if(isCargado){
         
@@ -115,7 +115,7 @@
     public int idMaquina { get; set; }
     public List<ImaqPre>? listPreguntas { get; set; } = null;
     public List<InspecDatum>? listaDataInspeccion { get; set; } = null;
-    public Models.Inspeccion nuevaInspeccion { get; set; } = new Models.Inspeccion();
+    public Model.Inspeccion nuevaInspeccion { get; set; } = new Model.Inspeccion();
     public string? tipoAnterior { get; set;} = "";
     public void cambioTipo(string tipo) => this.tipoAnterior = tipo;
     public int turno  { get; set;} 
@@ -130,7 +130,7 @@
 
     protected override void OnInitialized()
     {
-        nuevaInspeccion = new Models.Inspeccion();
+        nuevaInspeccion = new Model.Inspeccion();
         nuevaInspeccion.Igrupo = "A";
         nuevaInspeccion.Iturno = "1";
 
@@ -178,7 +178,7 @@
 
                 Notificacion("exito","","Cargado con exito");
 
-                nuevaInspeccion = new Models.Inspeccion();
+                nuevaInspeccion = new Model.Inspeccion();
                 listPreguntas = await DataPregunta.ObtenerLasPreguntasPorMquina(idMaquina);
                 tipoAnterior = "";
                 listaDataInspeccion = new List<InspecDatum>(listPreguntas.Count);

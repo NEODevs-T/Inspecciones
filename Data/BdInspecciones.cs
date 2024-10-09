@@ -1,4 +1,4 @@
-using Inspecciones.Models;
+using Inspecciones.Model;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Radzen;

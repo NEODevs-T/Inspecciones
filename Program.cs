@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Blazored.LocalStorage;
 using Inspecciones.Data;
 using Inspecciones.Services;
-using Inspecciones.Models;
+using Inspecciones.Model;
 using Radzen;
 
 
