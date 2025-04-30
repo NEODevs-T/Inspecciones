@@ -9,57 +9,72 @@
 
     @if(isCargado){
         
-        <section id="encabezadoInpec">
-            <aside id="EncabezadoIzquierda">
-                    <RadzenImage id="img" Path="img/paveca.png"/>
-                    <h1 id="titulo">INSPECCION DE MAQUINAS</h1>
-            </aside>
-            <aside id="EncabezadoDerecha">
-                @* <RadzenTemplateForm TItem="Models.Inspeccion" Data=@nuevaInspeccion> *@
-                    
-                        <RadzenStack Gap="2rem" Class="rz-p-1 rz-p-md-2">
-                            <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
-                                <RadzenColumn Size="1" SizeMD="1">
-                                    <RadzenLabel Text="Turno" />
-                                </RadzenColumn>
-                                <RadzenColumn  Size="5" SizeMD="5" Class="rz-text-align-center rz-text-align-md-center">
-                                        <RadzenRadioButtonList Name="Iturno" Data="@listaTurno" @bind-Value=@nuevaInspeccion.Iturno TValue="string" />
-                                        <RadzenRequiredValidator Component="Iturno" Text="Es Requerido" Popup=false/>
-                                </RadzenColumn>
-                                <RadzenColumn Size="1" SizeMD="1">
-                                    <RadzenLabel Text="Grupo" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="5" SizeMD="5" Class="rz-text-align-center rz-text-align-md-center">
-                                    <RadzenRadioButtonList Name="Igrupo" Data="@listaGrupo" @bind-Value=@nuevaInspeccion.Igrupo TValue="string"/>
-                                    <RadzenRequiredValidator Component="Igrupo" Text="Es Requerido" Popup=false/>
-                                </RadzenColumn>
-                            </RadzenRow>
-                            <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
-                                <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
-                                    <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Equipo">
-                                        <RadzenTextBox Name="Iequipo" @bind-Value=nuevaInspeccion.Iequipo Style="width: 100%;" />
-                                        <RadzenLengthValidator Component="Iequipo" Min="6" Text="Se debe poner los 6 numeros del equipo" Popup=false />
-                                        <RadzenLengthValidator Component="Iequipo"  Max="6" Text="Se debe poner los 6 numeros del equipo" Popup=false />
-                                    </RadzenFormField>
-                                </RadzenColumn>
-                                <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
-                                    <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Area">
-                                        <RadzenDropDown Name="Iarea" @bind-Value=nuevaInspeccion.Iarea Data=@listaArea style="width: 98%;" />
-                                        <RadzenRequiredValidator Component="Iarea" Text="Es Requerido" Popup=false/>
-                                    </RadzenFormField>
-                                </RadzenColumn>
-                                <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
-                                    <RadzenFormField  Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Ficha">
-                                        <RadzenTextBox Name="Ificha" @bind-Value=nuevaInspeccion.Ificha Style="width: 100%;" />
-                                        <RadzenRequiredValidator Component="Ificha" Text="Es Requerido" Popup=false/>
-                                    </RadzenFormField>
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenStack>
-                    
-                @* </RadzenTemplateForm> *@
-            </aside>
-        </section>  
+        <section id="encabezadoInpec" style="display: flex; justify-content: center; align-items: start; width: 100%; position: relative;">
+    <!-- Contenedor principal centrado -->
+    <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+        <!-- Encabezado con imagen y título -->
+        <aside style="display: flex; align-items: center;">
+            <div id="EncabezadoIzquierda" style="display: flex; align-items: center;">
+                <RadzenImage id="img" Path="img/paveca.png"/>
+                <h1 id="titulo" style="margin-left: 10px;">INSPECCIÓN DE MONTACARGAS</h1>
+            </div>
+        </aside>
+
+        <!-- Formulario centrado -->
+        <aside id="EncabezadoDerecha">
+            <RadzenStack Gap="2rem" Class="rz-p-1 rz-p-md-2">
+                <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
+                    <RadzenColumn Size="1" SizeMD="1">
+                        <RadzenLabel Text="Turno" />
+                    </RadzenColumn>
+                    <RadzenColumn Size="5" SizeMD="4" Class="rz-text-align-center rz-text-align-md-center">
+                        <RadzenRadioButtonList Name="Iturno" Data="@listaTurno" @bind-Value=@nuevaInspeccion.Iturno TValue="string" />
+                        <RadzenRequiredValidator Component="Iturno" Text="Es Requerido" Popup=false/>
+                    </RadzenColumn>
+                    <RadzenColumn Size="1" SizeMD="1">
+                        <RadzenLabel Text="Grupo" />
+                    </RadzenColumn>
+                    <RadzenColumn Size="5" SizeMD="4" Class="rz-text-align-center rz-text-align-md-center">
+                        <RadzenRadioButtonList Name="Igrupo" Data="@listaGrupo" @bind-Value=@nuevaInspeccion.Igrupo TValue="string"/>
+                        <RadzenRequiredValidator Component="Igrupo" Text="Es Requerido" Popup=false/>
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
+                    <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
+                        <RadzenFormField Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Equipo">
+                            <RadzenTextBox Name="Iequipo" @bind-Value=nuevaInspeccion.Iequipo Style="width: 100%;" />
+                            <RadzenLengthValidator Component="Iequipo" Min="6" Text="Se debe poner los 6 numeros del equipo" Popup=false />
+                            <RadzenLengthValidator Component="Iequipo"  Max="6" Text="Se debe poner los 6 numeros del equipo" Popup=false />
+                        </RadzenFormField>
+                    </RadzenColumn>
+                    <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
+                        <RadzenFormField Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Área">
+                            <RadzenDropDown Name="Iarea" @bind-Value=nuevaInspeccion.Iarea Data=@listaArea style="width: 98%;" />
+                            <RadzenRequiredValidator Component="Iarea" Text="Es Requerido" Popup=false/>
+                        </RadzenFormField>
+                    </RadzenColumn>
+                    <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
+                        <RadzenFormField Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Ficha">
+                            <RadzenTextBox Name="Ificha" @bind-Value=nuevaInspeccion.Ificha Style="width: 100%;" />
+                            <RadzenRequiredValidator Component="Ificha" Text="Es Requerido" Popup=false/>
+                        </RadzenFormField>
+                    </RadzenColumn>
+                </RadzenRow>
+            </RadzenStack>
+        </aside>
+    </div>
+
+<!-- Contenedor de la fecha, código de equipo y versión alineados a la derecha pero más abajo e inclinado a la izquierda -->
+<div style="position: absolute; right: 80px; top: 105px; text-align: right; min-width: 200px; padding: 10px;">
+    <p><strong>Fecha de Emision: </strong> @DateTime.Now.ToString("dd/MM/yyyy")</p>
+    <p><strong>Código:</strong> @ObtenerCodigoEquipo()</p>
+    <p><strong>Versión:</strong> 02</p>
+</div>
+
+
+
+</section>
+
     }else{
         <BSRow class="carga" Justify="Justify.Center">
             <BSCol Column="3">
@@ -101,10 +116,55 @@
                     <h3 class="textObsevacion"><RadzenTextArea @bind-Value=item.Idobserv  class="w-100" Cols="30" Rows="2" /></h3>
                 </aside>
         }
-        <section id="secCarga">
-            @* <RadzenButton Click=@Registrar Text="Registrar" ButtonStyle="ButtonStyle.Success" /> *@
-            <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Success" Text="Registrar" />
-        </section>
+<section id="secCarga">
+    <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Success" Text="Registrar" />
+</section>
+
+<section id="firmas" style="margin-top: 20px; display: flex; flex-direction: column; align-items: flex-start;">
+    <!-- Firma del trabajador con mismo ancho que la columna "Elaborado por" -->
+    <table style="border-collapse: collapse; width: 33.33%; margin-bottom: 10px;">
+        <tr>
+            <td style="background-color: #0c6835; color: white; font-weight: bold; padding: 10px; border: 1px solid black; text-align: center;">
+                FIRMA DEL TRABAJADOR:
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 50px; border: 1px solid black;"></td>
+        </tr>
+        <tr>
+            <td style="text-align: center; border: 1px solid black; padding: 8px;">
+                Nombre / Ficha / Firma
+            </td>
+        </tr>
+    </table>
+
+    <!-- Tabla de firmas institucionales -->
+    <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+        <tr>
+            <td style="border: 1px solid black; padding: 8px; width: 33%;">Elaborado por:</td>
+            <td style="border: 1px solid black; padding: 8px; width: 33%;">Revisado por:</td>
+            <td style="border: 1px solid black; padding: 8px; width: 34%;">Aprobado por:</td>
+        </tr>
+<tr>
+    <td style="border: 1px solid black; padding: 16px; font-size: 14px; text-align: center; vertical-align: middle;">
+        @ObteneroElaborado()
+    </td>
+    <td style="border: 1px solid black; padding: 16px; font-size: 14px; text-align: center; vertical-align: middle;">
+        @ObteneroRevisado()
+    </td>
+    <td style="border: 1px solid black; padding: 16px; font-size: 14px; text-align: center; vertical-align: middle;">
+        @ObteneroAprobado()
+    </td>
+</tr>
+
+        <tr>
+            <td style="border: 1px solid black; padding: 8px;">Fecha de Ult. Aprobación: @FechadeAprobacion()</td>
+            <td style="border: 1px solid black; padding: 8px;">Fecha de Vencimiento: N/A</td>
+            <td style="border: 1px solid black; padding: 8px;">Página: 1 / 1</td>
+        </tr>
+    </table>
+</section>
+
     }
 
 </RadzenTemplateForm>
@@ -135,7 +195,62 @@
         nuevaInspeccion.Iturno = "1";
 
     }
-    
+
+    private string ObtenerCodigoEquipo() 
+    {
+        if (idMaquina == 8) return "10-FO-185"; // Maquinaria Pesada Retroexcavadora
+        if (idMaquina == 7) return "10-FO-334"; // Maquinaria Pesada (Jaiba)
+        if (idMaquina == 6) return "10-FO-335"; // Maquinaria Pesada (PAYLOADER)
+        if (idMaquina == 5) return "10-FO-349"; // Montacargas tipo Roll Clamp
+        if (idMaquina == 4) return "10-FO-313"; // Montacargas tipo horquilla (Uña)
+        if (idMaquina == 3) return "10-FO-332"; // Montacargas tipo horquilla (Eléctrico)
+        if (idMaquina == 2) return "10-FO-348"; // Montacargas tipo Roll Clamp (Eléctrico)
+        return "";
+    }
+    private string ObteneroElaborado() 
+    {
+        //if (idMaquina == 8) return "---------"; // Maquinaria Pesada Retroexcavadora
+        if (idMaquina == 7) return "Superintendente Producción Planta de Pulpa"; // Maquinaria Pesada (Jaiba)
+        if (idMaquina == 6) return "Superintendente Producción Planta de Pulpa"; // Maquinaria Pesada (PAYLOADER)
+        if (idMaquina == 5) return "Analista Logístico"; // Montacargas tipo Roll Clamp
+        //if (idMaquina == 4) return "10-FO-313"; // Montacargas tipo horquilla (Uña)
+        if (idMaquina == 3) return "Superintendente Producción Molinos"; // Montacargas tipo horquilla (Eléctrico)
+        if (idMaquina == 2) return "Analista Logístico"; // Montacargas tipo Roll Clamp (Eléctrico)
+        return "";
+    }
+        private string ObteneroRevisado() 
+    {
+        //if (idMaquina == 8) return "---------"; // Maquinaria Pesada Retroexcavadora
+        if (idMaquina == 7) return "Supervisor Especialista de Taller Centralizado Mantenimiento Automotriz"; // Maquinaria Pesada (Jaiba)
+        if (idMaquina == 6) return "Supervisor Especialista de Taller Centralizado Mantenimiento Automotriz"; // Maquinaria Pesada (PAYLOADER)
+        if (idMaquina == 5) return "Supervisor Especialista de Taller Centralizado Mantenimiento Automotriz"; // Montacargas tipo Roll Clamp
+        //if (idMaquina == 4) return "10-FO-313"; // Montacargas tipo horquilla (Uña)
+        if (idMaquina == 3) return "Supervisor Especialista de Taller Centralizado Mantenimiento Automotriz"; // Montacargas tipo horquilla (Eléctrico)
+        if (idMaquina == 2) return "Supervisor Especialista de Taller Centralizado Mantenimiento Automotriz"; // Montacargas tipo Roll Clamp (Eléctrico)
+        return "";
+    }
+    private string ObteneroAprobado() 
+    {
+        //if (idMaquina == 8) return "---------"; // Maquinaria Pesada Retroexcavadora
+        if (idMaquina == 7) return "Gerente de Planta de Pulpa y Destintado"; // Maquinaria Pesada (Jaiba)
+        if (idMaquina == 6) return "Gerente de Planta de Pulpa y Destintado"; // Maquinaria Pesada (PAYLOADER)
+        if (idMaquina == 5) return "Gerente de Logística de Materiales"; // Montacargas tipo Roll Clamp
+        //if (idMaquina == 4) return "10-FO-313"; // Montacargas tipo horquilla (Uña)
+        if (idMaquina == 3) return "Gerente de Producción Molinos"; // Montacargas tipo horquilla (Eléctrico)
+        if (idMaquina == 2) return "Gerente de Logística de Materiales"; // Montacargas tipo Roll Clamp (Eléctrico)
+        return "";
+    }
+        private string FechadeAprobacion() 
+    {
+        if (idMaquina == 8) return "19/03/2025"; // Maquinaria Pesada Retroexcavadora
+        if (idMaquina == 7) return "19/03/2025"; // Maquinaria Pesada (Jaiba)
+        if (idMaquina == 6) return "19/03/2025"; // Maquinaria Pesada (PAYLOADER)
+        if (idMaquina == 5) return "12/02/2025"; // Montacargas tipo Roll Clamp
+        if (idMaquina == 4) return "19/03/2025"; // Montacargas tipo horquilla (Uña)
+        if (idMaquina == 3) return "19/03/2025"; // Montacargas tipo horquilla (Eléctrico)
+        if (idMaquina == 2) return "12/02/2025"; // Montacargas tipo Roll Clamp (Eléctrico)
+        return "";
+    }
     protected override async Task OnParametersSetAsync()
     {
         isCargado = false;
