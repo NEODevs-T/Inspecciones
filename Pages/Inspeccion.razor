@@ -16,7 +16,7 @@
         <aside style="display: flex; align-items: center;">
             <div id="EncabezadoIzquierda" style="display: flex; align-items: center;">
                 <RadzenImage id="img" Path="img/paveca.png"/>
-                <h1 id="titulo" style="margin-left: 10px;">INSPECCIÓN DE MONTACARGAS</h1>
+                <h1 id="titulo" style="margin-left: 10px;">@ObtenerTitulo()</h1>
             </div>
         </aside>
 
@@ -251,6 +251,18 @@
         if (idMaquina == 2) return "12/02/2025"; // Montacargas tipo Roll Clamp (Eléctrico)
         return "";
     }
+            private string ObtenerTitulo() 
+    {
+        if (idMaquina == 8) return "INSPECCIÓN DE MONTACARGAS"; // Maquinaria Pesada Retroexcavadora
+        if (idMaquina == 7) return "INSPECCIÓN DE MAQUINARIA"; // Maquinaria Pesada (Jaiba)
+        if (idMaquina == 6) return "INSPECCIÓN DE MONTACARGAS"; // Maquinaria Pesada (PAYLOADER)
+        if (idMaquina == 5) return "INSPECCIÓN DE MONTACARGAS"; // Montacargas tipo Roll Clamp
+        if (idMaquina == 4) return "INSPECCIÓN DE MONTACARGAS"; // Montacargas tipo horquilla (Uña)
+        if (idMaquina == 3) return "INSPECCIÓN DE MONTACARGAS"; // Montacargas tipo horquilla (Eléctrico)
+        if (idMaquina == 2) return "INSPECCIÓN DE MONTACARGAS"; // Montacargas tipo Roll Clamp (Eléctrico)
+        return "";
+    }
+
     protected override async Task OnParametersSetAsync()
     {
         isCargado = false;
