@@ -22,7 +22,8 @@
 
         <!-- Formulario centrado -->
         <aside id="EncabezadoDerecha">
-            <RadzenStack Gap="2rem" Class="rz-p-1 rz-p-md-2">
+                        <RadzenStack Gap="2rem" Class="rz-p-1 rz-p-md-2">
+                <!-- Turno y Grupo (puedes dejar igual o mover si quieres) -->
                 <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
                     <RadzenColumn Size="1" SizeMD="1">
                         <RadzenLabel Text="Turno" />
@@ -39,24 +40,31 @@
                         <RadzenRequiredValidator Component="Igrupo" Text="Es Requerido" Popup=false/>
                     </RadzenColumn>
                 </RadzenRow>
+                <!-- Equipo, Área, Ficha y Fecha de Inspección en la MISMA línea -->
                 <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
-                    <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
-                        <RadzenFormField Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Equipo">
+                    <RadzenColumn Size="3" SizeMD="3">
+                        <RadzenFormField Variant="Variant.Flat" style="width: 100%;" Text="Equipo">
                             <RadzenTextBox Name="Iequipo" @bind-Value=nuevaInspeccion.Iequipo Style="width: 100%;" />
                             <RadzenLengthValidator Component="Iequipo" Min="6" Text="Se debe poner los 6 numeros del equipo" Popup=false />
                             <RadzenLengthValidator Component="Iequipo"  Max="6" Text="Se debe poner los 6 numeros del equipo" Popup=false />
                         </RadzenFormField>
                     </RadzenColumn>
-                    <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
-                        <RadzenFormField Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Área">
-                            <RadzenDropDown Name="Iarea" @bind-Value=nuevaInspeccion.Iarea Data=@listaArea style="width: 98%;" />
+                    <RadzenColumn Size="3" SizeMD="3">
+                        <RadzenFormField Variant="Variant.Flat" style="width: 100%;" Text="Área">
+                            <RadzenDropDown Name="Iarea" @bind-Value=nuevaInspeccion.Iarea Data=@listaArea style="width: 100%;" />
                             <RadzenRequiredValidator Component="Iarea" Text="Es Requerido" Popup=false/>
                         </RadzenFormField>
                     </RadzenColumn>
-                    <RadzenColumn Size="4" SizeMD="4" Class="rz-text-align-start rz-text-align-md-start">
-                        <RadzenFormField Variant="Variant.Flat" style="width: 98%;" Size="5" SizeMD="5" Text="Ficha">
+                    <RadzenColumn Size="3" SizeMD="3">
+                        <RadzenFormField Variant="Variant.Flat" style="width: 100%;" Text="Ficha">
                             <RadzenTextBox Name="Ificha" @bind-Value=nuevaInspeccion.Ificha Style="width: 100%;" />
                             <RadzenRequiredValidator Component="Ificha" Text="Es Requerido" Popup=false/>
+                        </RadzenFormField>
+                    </RadzenColumn>
+                    <RadzenColumn Size="5" SizeMD="5">
+                        <RadzenFormField Variant="Variant.Flat" style="width: 100%;" Text="Fecha de la Inspección">
+                            <RadzenDatePicker Name="Ifecha" @bind-Value=nuevaInspeccion.Ifecha DateFormat="dd/MM/yyyy" Style="width: 100%;" />
+                            <RadzenRequiredValidator Component="Ifecha" Text="Es requerido" Popup=false/>
                         </RadzenFormField>
                     </RadzenColumn>
                 </RadzenRow>
@@ -193,6 +201,7 @@
         nuevaInspeccion = new Model.Inspeccion();
         nuevaInspeccion.Igrupo = "A";
         nuevaInspeccion.Iturno = "1";
+        nuevaInspeccion.Ifecha = DateTime.Today;
 
     }
 
@@ -268,6 +277,7 @@
         isCargado = false;
         nuevaInspeccion.Iarea = "";
         nuevaInspeccion.Iequipo = "";
+        nuevaInspeccion.Ifecha = DateTime.Today;
 
         if(idMaquina == 6){
             nuevaInspeccion.Iequipo = "210116";
@@ -293,7 +303,6 @@
 
     protected async Task Registrar(){
         try{
-            nuevaInspeccion.Ifecha = DateTime.Now;  
             nuevaInspeccion.Iequipo = nuevaInspeccion.Iequipo.Insert(3,"-");
             band = await DataInspeccion.InsertarInspeccion(nuevaInspeccion,listaDataInspeccion);
             if(band){
