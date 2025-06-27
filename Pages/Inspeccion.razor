@@ -41,33 +41,28 @@
                     </RadzenColumn>
                 </RadzenRow>
                 <!-- Equipo, Área, Ficha y Fecha de Inspección en la MISMA línea -->
-                <RadzenRow AlignItems="AlignItems.Center" RowGap="0.25rem">
-                    <RadzenColumn Size="3" SizeMD="3">
-                        <RadzenFormField Variant="Variant.Flat" style="width: 100%;" Text="Equipo">
+                <div style="display: flex; gap: 1rem; flex-wrap: nowrap; overflow-x: auto; max-width: 100%;">
+                    <div style="width: 100px; min-width: 100px;">
+                        <RadzenFormField Text="Equipo">
                             <RadzenTextBox Name="Iequipo" @bind-Value=nuevaInspeccion.Iequipo Style="width: 100%;" />
-                            <RadzenLengthValidator Component="Iequipo" Min="6" Text="Se debe poner los 6 numeros del equipo" Popup=false />
-                            <RadzenLengthValidator Component="Iequipo"  Max="6" Text="Se debe poner los 6 numeros del equipo" Popup=false />
                         </RadzenFormField>
-                    </RadzenColumn>
-                    <RadzenColumn Size="3" SizeMD="3">
-                        <RadzenFormField Variant="Variant.Flat" style="width: 100%;" Text="Área">
-                            <RadzenDropDown Name="Iarea" @bind-Value=nuevaInspeccion.Iarea Data=@listaArea style="width: 100%;" />
-                            <RadzenRequiredValidator Component="Iarea" Text="Es Requerido" Popup=false/>
+                    </div>
+                    <div style="width: 100px; min-width: 100px;">
+                        <RadzenFormField Text="Área">
+                            <RadzenDropDown Name="Iarea" @bind-Value=nuevaInspeccion.Iarea Data=@listaArea Style="width: 90px; min-width: 90px; max-width: 90px;" />
                         </RadzenFormField>
-                    </RadzenColumn>
-                    <RadzenColumn Size="3" SizeMD="3">
-                        <RadzenFormField Variant="Variant.Flat" style="width: 100%;" Text="Ficha">
+                    </div>
+                    <div style="width: 100px; min-width: 100px;">
+                        <RadzenFormField Text="Ficha">
                             <RadzenTextBox Name="Ificha" @bind-Value=nuevaInspeccion.Ificha Style="width: 100%;" />
-                            <RadzenRequiredValidator Component="Ificha" Text="Es Requerido" Popup=false/>
                         </RadzenFormField>
-                    </RadzenColumn>
-                    <RadzenColumn Size="5" SizeMD="5">
-                        <RadzenFormField Variant="Variant.Flat" style="width: 100%;" Text="Fecha de la Inspección">
-                            <RadzenDatePicker Name="Ifecha" @bind-Value=nuevaInspeccion.Ifecha DateFormat="dd/MM/yyyy" Style="width: 100%;" />
-                            <RadzenRequiredValidator Component="Ifecha" Text="Es requerido" Popup=false/>
+                    </div>
+                    <div style="width: 180px; min-width: 180px;">
+                        <RadzenFormField Text="Fecha de la Inspección">
+                            <RadzenDatePicker Name="Ifecha" @bind-Value=nuevaInspeccion.Ifecha DateFormat="dd/MM/yyyy" Style="width: 100%;" Max="@DateTime.Today"/>
                         </RadzenFormField>
-                    </RadzenColumn>
-                </RadzenRow>
+                    </div>
+                </div>
             </RadzenStack>
         </aside>
     </div>
@@ -303,6 +298,13 @@
 
     protected async Task Registrar(){
         try{
+            if (nuevaInspeccion.Ifecha > DateTime.Today)
+            {
+                Notificacion("error", "Fecha inválida", "No puede seleccionar una fecha mayor al día actual.");
+                return;
+            }
+        nuevaInspeccion.Iequipo = nuevaInspeccion.Iequipo.Insert(3,"-");
+        band = await DataInspeccion.InsertarInspeccion(nuevaInspeccion,listaDataInspeccion);
             nuevaInspeccion.Iequipo = nuevaInspeccion.Iequipo.Insert(3,"-");
             band = await DataInspeccion.InsertarInspeccion(nuevaInspeccion,listaDataInspeccion);
             if(band){
