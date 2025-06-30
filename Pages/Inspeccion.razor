@@ -40,36 +40,40 @@
                         <RadzenRequiredValidator Component="Igrupo" Text="Es Requerido" Popup=false/>
                     </RadzenColumn>
                 </RadzenRow>
-                <!-- Equipo, Área, Ficha y Fecha de Inspección en la MISMA línea -->
-                <div style="display: flex; gap: 1rem; flex-wrap: nowrap; overflow-x: auto; max-width: 100%;">
-                    <div style="width: 100px; min-width: 100px;">
-                        <RadzenFormField Text="Equipo">
-                            <RadzenTextBox Name="Iequipo" @bind-Value=nuevaInspeccion.Iequipo Style="width: 100%;" />
-                        </RadzenFormField>
-                    </div>
-                    <div style="width: 100px; min-width: 100px;">
-                        <RadzenFormField Text="Área">
-                            <RadzenDropDown Name="Iarea" @bind-Value=nuevaInspeccion.Iarea Data=@listaArea Style="width: 90px; min-width: 90px; max-width: 90px;" />
-                        </RadzenFormField>
-                    </div>
-                    <div style="width: 100px; min-width: 100px;">
-                        <RadzenFormField Text="Ficha">
-                            <RadzenTextBox Name="Ificha" @bind-Value=nuevaInspeccion.Ificha Style="width: 100%;" />
-                        </RadzenFormField>
-                    </div>
-                    <div style="width: 180px; min-width: 180px;">
-                        <RadzenFormField Text="Fecha de la Inspección">
-                            <RadzenDatePicker Name="Ifecha" @bind-Value=nuevaInspeccion.Ifecha DateFormat="dd/MM/yyyy" Style="width: 100%;" Max="@DateTime.Today"/>
-                        </RadzenFormField>
-                    </div>
-                </div>
+                        <!-- Equipo, Área, Ficha y Fecha de Inspección en la MISMA línea -->
+<div style="display: flex; gap: 1rem; flex-wrap: wrap; max-width: 100%;">
+    <div style="width: 200px; min-width: 200px;">
+        <RadzenFormField Text="Equipo" Variant="Variant.Flat">
+            <RadzenTextBox Name="Iequipo" @bind-Value=nuevaInspeccion.Iequipo Style="width: 100%;" />
+            <RadzenLengthValidator Component="Iequipo" Min="6" Text="Se debe poner los 6 números del equipo" Popup="false" Auto="true" />
+            <RadzenLengthValidator Component="Iequipo" Max="6" Text="Se debe poner los 6 números del equipo" Popup="false" Auto="true" />
+        </RadzenFormField>
+    </div>
+    <div style="width: 200px; min-width: 200px;">
+        <RadzenFormField Text="Área" Variant="Variant.Flat">
+            <RadzenDropDown Name="Iarea" @bind-Value=nuevaInspeccion.Iarea Data=@listaArea Style="width: 100%;" />
+            <RadzenRequiredValidator Component="Iarea" Text="Es Requerido" Popup="false" Auto="true" />
+        </RadzenFormField>
+    </div>
+    <div style="width: 200px; min-width: 200px;">
+        <RadzenFormField Text="Ficha" Variant="Variant.Flat">
+            <RadzenTextBox Name="Ificha" @bind-Value=nuevaInspeccion.Ificha Style="width: 100%;" />
+            <RadzenRequiredValidator Component="Ificha" Text="Es Requerido" Popup="false" Auto="true" />
+        </RadzenFormField>
+    </div>
+    <div style="width: 220px; min-width: 220px;">
+        <RadzenFormField Text="Fecha de la Inspección">
+            <RadzenDatePicker Name="Ifecha" @bind-Value=nuevaInspeccion.Ifecha DateFormat="dd/MM/yyyy" Style="width: 100%;" Max="@DateTime.Today"/>
+        </RadzenFormField>
+    </div>
+</div>
             </RadzenStack>
         </aside>
     </div>
 
 <!-- Contenedor de la fecha, código de equipo y versión alineados a la derecha pero más abajo e inclinado a la izquierda -->
 <div style="position: absolute; right: 80px; top: 105px; text-align: right; min-width: 200px; padding: 10px;">
-    <p><strong>Fecha de Emision: </strong> @DateTime.Now.ToString("dd/MM/yyyy")</p>
+    <p><strong>Fecha de Emision: </strong> @FechadeAprobacion()</p>
     <p><strong>Código:</strong> @ObtenerCodigoEquipo()</p>
     <p><strong>Versión:</strong> 02</p>
 </div>
@@ -303,8 +307,8 @@
                 Notificacion("error", "Fecha inválida", "No puede seleccionar una fecha mayor al día actual.");
                 return;
             }
-        nuevaInspeccion.Iequipo = nuevaInspeccion.Iequipo.Insert(3,"-");
-        band = await DataInspeccion.InsertarInspeccion(nuevaInspeccion,listaDataInspeccion);
+        //nuevaInspeccion.Iequipo = nuevaInspeccion.Iequipo.Insert(3,"-");
+        //band = await DataInspeccion.InsertarInspeccion(nuevaInspeccion,listaDataInspeccion);
             nuevaInspeccion.Iequipo = nuevaInspeccion.Iequipo.Insert(3,"-");
             band = await DataInspeccion.InsertarInspeccion(nuevaInspeccion,listaDataInspeccion);
             if(band){

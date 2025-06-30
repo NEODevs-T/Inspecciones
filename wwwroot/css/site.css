@@ -139,4 +139,44 @@ body{
     display: none !important;
 }
 
+.rz-invalid .rz-inputtext,
+.rz-invalid .rz-dropdown,
+.rz-invalid .rz-dropdown .rz-dropdown-label {
+    border-color: #e53935 !important;
+}
 
+.rz-message {
+    color: #e53935 !important;
+    font-size: 12px !important;
+    margin-top: 2px !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    display: block !important;
+    position: static !important;
+}
+
+.rz-form-field {
+    margin-bottom: 1.5rem !important;
+}
+
+/* Forzar mensajes de error debajo del campo en Radzen */
+.rz-form-field .rz-message {
+    position: static !important;
+    display: block !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    z-index: 1 !important;
+}
+.rz-form-field {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+}
+.rz-form-field .rz-inputtext,
+.rz-form-field .rz-dropdown {
+    box-sizing: border-box !important;
+}
