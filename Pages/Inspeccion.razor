@@ -73,7 +73,7 @@
 
 <!-- Contenedor de la fecha, código de equipo y versión alineados a la derecha pero más abajo e inclinado a la izquierda -->
 <div style="position: absolute; right: 80px; top: 105px; text-align: right; min-width: 200px; padding: 10px;">
-    <p><strong>Fecha de Emision: </strong> @FechadeAprobacion()</p>
+    <p><strong>Fecha de Emision: </strong> @FechaDeEmision()</p>
     <p><strong>Código:</strong> @ObtenerCodigoEquipo()</p>
     <p><strong>Versión:</strong> 02</p>
 </div>
@@ -256,6 +256,18 @@
         if (idMaquina == 5) return "12/02/2025"; // Montacargas tipo Roll Clamp
         if (idMaquina == 4) return "19/03/2025"; // Montacargas tipo horquilla (Uña)
         if (idMaquina == 3) return "19/03/2025"; // Montacargas tipo horquilla (Eléctrico)
+        if (idMaquina == 2) return "12/02/2025"; // Montacargas tipo Roll Clamp (Eléctrico)
+        return "";
+    }
+
+            private string FechaDeEmision() 
+    {
+        if (idMaquina == 8) return "26/02/2024"; // Maquinaria Pesada Retroexcavadora
+        if (idMaquina == 7) return "22/10/2024"; // Maquinaria Pesada (Jaiba)
+        if (idMaquina == 6) return "22/10/2024"; // Maquinaria Pesada (PAYLOADER)
+        if (idMaquina == 5) return "12/02/2025"; // Montacargas tipo Roll Clamp
+        if (idMaquina == 4) return "04/10/2024"; // Montacargas tipo horquilla (Uña)
+        if (idMaquina == 3) return "08/10/2024"; // Montacargas tipo horquilla (Eléctrico)
         if (idMaquina == 2) return "12/02/2025"; // Montacargas tipo Roll Clamp (Eléctrico)
         return "";
     }
